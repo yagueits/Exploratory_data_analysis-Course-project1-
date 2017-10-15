@@ -1,0 +1,10 @@
+#Firstly you will have to copy the "household_power_consumption.txt" file in your working directory. 
+#Note that the dplyr library is loaded. It must be installed the "dplyr" package with install.packages("dplyr") (or use )
+library(dplyr)
+Datos <- read.csv("household_power_consumption.txt", header=T, sep=';', na.strings="?")
+Datos2$Date <- as.Date(Datos2$Date, format="%d/%m/%Y")
+Datos2 <- Datos %>% filter(Date %in% c("1/2/2007","2/2/2007"))
+Datos2$DiaHora <- strptime(paste(Datos2$Date, Datos2$Time, sep=" "), "%d/%m/%Y %H:%M:%S")
+png("plot2.png", width=480, height=480)
+plot(Datos2$DiaHora, Datos2$Global_active_power, type="l", xlab="", ylab="Global Active Power (kilowatts)")
+dev.off()
